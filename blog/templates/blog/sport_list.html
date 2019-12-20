@@ -1,0 +1,37 @@
+
+{% extends 'blog/base.html' %}
+
+{% block title %}
+    Sport List
+{% endblock %}
+
+{% block create_button %}
+    {% if perms.base.add_sport %}
+    <a
+        href="{% url 'base_comment_create_urlpattern'  %}"
+        class="button button-primary">
+      Create New Comment</a>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+  <h2>Sport List</h2>
+    {% if perms.base.add_sport %}
+    <div class="mobile">
+      <a
+          href="{% url 'base_comment_create_urlpattern' %}"
+          class="button button-primary">
+        Create New Sport</a>
+    </div>
+    {% endif %}
+  <ul>
+    {% for sport in sport_list %}
+      <li>
+        <a href="{{ sport.get_absolute_url }}">
+          {{ sport }}</a>
+      </li>
+    {% empty %}
+      <li><em>There are currently no sports.</em></li>
+    {% endfor %}
+  </ul>
+{% endblock %}
